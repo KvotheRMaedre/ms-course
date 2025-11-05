@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tech.kvothe.hrpayroll.entity.Payment;
 import tech.kvothe.hrpayroll.entity.Worker;
+import tech.kvothe.hrpayroll.feignclients.WorkerFeignClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,19 +13,14 @@ import java.util.Map;
 @Service
 public class PaymentService {
 
-    private final RestTemplate restTemplate;
+    private final WorkerFeignClient workerFeignClient;
 
-    @Value("${hr-worker.host}")
-    private String workerHost;
-
-    public PaymentService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public PaymentService(WorkerFeignClient workerFeignClient) {
+        this.workerFeignClient = workerFeignClient;
     }
 
     public Payment getPayment(Long workerId, int days) {
-        Map<String, String> uriVariable = new HashMap<>();
-        uriVariable.put("id", workerId.toString());
-        Worker worker = restTemplate.getForObject(workerHost + "/worker/{id}", Worker.class, uriVariable);
+        Worker worker = workerFeignClient.findById(workerId).getBody();
         return new Payment(worker.getName(), worker.getDailyIncome(), days);
     }
 }
