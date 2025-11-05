@@ -1,5 +1,8 @@
 package tech.kvothe.hrworker.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +17,14 @@ import java.util.List;
 @RequestMapping("worker")
 public class WorkerController {
 
+    private static Logger logger = LoggerFactory.getLogger(WorkerController.class);
+
+    private final Environment env;
+
     private final WorkerService workerService;
 
-    public WorkerController(WorkerService workerService) {
+    public WorkerController(Environment env, WorkerService workerService) {
+        this.env = env;
         this.workerService = workerService;
     }
 
@@ -28,7 +36,10 @@ public class WorkerController {
     }
 
     @GetMapping("/{workerId}")
+
     public ResponseEntity<Worker> findById(@PathVariable("workerId") Long workerId) {
+
+        logger.info("PORT = " + env.getProperty("local.server.port"));
         var worker = workerService.findById(workerId);
 
         return ResponseEntity.ok(worker);
