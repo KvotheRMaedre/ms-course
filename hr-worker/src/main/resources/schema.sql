@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS worker (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    daily_income DOUBLE NOT NULL
+);
