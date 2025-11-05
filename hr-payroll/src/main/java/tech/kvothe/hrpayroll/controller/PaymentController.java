@@ -18,7 +18,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/{workerId}/{days}")
+    @GetMapping("/{workerId}/days/{days}")
     public ResponseEntity<Payment> getPayment(@PathVariable("workerId") Long workId, @PathVariable("days") int days) {
         var payment = paymentService.getPayment(workId, days);
         return ResponseEntity.ok(payment);
