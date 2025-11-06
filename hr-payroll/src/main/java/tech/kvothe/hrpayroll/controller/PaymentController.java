@@ -26,7 +26,7 @@ public class PaymentController {
         return ResponseEntity.ok(payment);
     }
 
-    public ResponseEntity<Payment> getPaymentAlternative(Long workId, int days) {
+    public ResponseEntity<Void> getPaymentAlternative(Long workId, int days, Throwable e) {
         return ResponseEntity.internalServerError().build();
     }
 }
