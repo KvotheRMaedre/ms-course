@@ -20,14 +20,22 @@ public class UserController {
 
     @GetMapping("/email/{email}")
     public ResponseEntity<User> findUserByEmail(@PathVariable("email") String email) {
-        var user = userService.findByEmail(email);
-        return ResponseEntity.ok(user);
+        try {
+            var user = userService.findByEmail(email);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserByEmail(@PathVariable("id") Long id) {
-        var user = userService.findById(id);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<User> findUserById(@PathVariable("id") Long id) {
+        try {
+            var user = userService.findById(id);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
