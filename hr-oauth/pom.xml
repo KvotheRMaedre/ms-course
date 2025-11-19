@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tech.kvothe</groupId>
-	<artifactId>hr-ouath</artifactId>
+	<artifactId>hr-oauth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hr-ouath</name>
+	<name>hr-oauth</name>
 	<description>Auth server</description>
 	<url/>
 	<licenses>
@@ -38,6 +38,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>4.3.0</version>
 		</dependency>
 
 		<dependency>
