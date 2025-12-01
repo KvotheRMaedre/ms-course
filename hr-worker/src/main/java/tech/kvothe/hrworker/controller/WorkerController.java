@@ -20,9 +20,6 @@ import java.util.List;
 @RefreshScope
 public class WorkerController {
 
-    @Value("${test.config}")
-    private String testConfig;
-
     private static Logger logger = LoggerFactory.getLogger(WorkerController.class);
 
     private final Environment env;
@@ -36,7 +33,6 @@ public class WorkerController {
 
     @GetMapping("/config")
     public ResponseEntity<Void> findConfig() {
-        logger.info("CONFIG = " + testConfig);
         var worker = workerService.findAll();
 
         return ResponseEntity.noContent().build();
